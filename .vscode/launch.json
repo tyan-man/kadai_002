@@ -4,21 +4,59 @@
     // 詳細情報は次を確認してください: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "runserver",
             "type": "debugpy",
             "request": "launch",
+            "program": "${workspaceFolder}/myvenv/myproject/manage.py",
             "args": [
                 "runserver"
             ],
             "django": true,
-            "env":{
-                "DB_USER":"postgres",
-                "DB_PASSWORD":"riri1208",
-            },
-            "autoStartBrowser": false,
-            "program": "${workspaceFolder}\\myvenv\\myproject\\manage.py"
+            "env": {
+                "DB_DATABASE": "NAGOYAMESHI",
+                "DB_USERNAME": "postgres",
+                "DB_PASSWORD": "riri1208",
+                "DB_HOST": "127.0.0.1",
+                "DB_PORT": "5432",
+                "DJANGO_SETTINGS_MODULE": "myproject.settings_dev",
+            }
+        },
+        {
+            "name": "makemigrations",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/myvenv/myproject/manage.py",
+            "args": [
+                "makemigrations"
+            ],
+            "django": true,
+            "env": {
+                "DB_DATABASE": "NAGOYAMESHI",
+                "DB_USERNAME": "postgres",
+                "DB_PASSWORD": "riri1208",
+                "DB_HOST": "127.0.0.1",
+                "DB_PORT": "5432",
+                "DJANGO_SETTINGS_MODULE": "myproject.settings_dev",
+            }
+        },
+        {
+            "name": "migrate",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/myvenv/myproject/manage.py",
+            "args": [
+                "migrate"
+            ],
+            "django": true,
+            "env": {
+                "DB_DATABASE": "NAGOYAMESHI",
+                "DB_USERNAME": "postgres",
+                "DB_PASSWORD": "riri1208",
+                "DB_HOST": "127.0.0.1",
+                "DB_PORT": "5432",
+                "DJANGO_SETTINGS_MODULE": "myproject.settings_dev",
+            }
         }
     ]
 }
