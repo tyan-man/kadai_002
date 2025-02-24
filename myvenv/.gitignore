@@ -1,0 +1,5 @@
+#VSCodeの設定ファイル
+.vscode/
+
+#pythonのコンパイルファイル
+__pycache__/
