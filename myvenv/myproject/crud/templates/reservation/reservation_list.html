@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}予約一覧｜NAGOYAMESHI{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>予約一覧</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>予約ID</th>
+                <th>ユーザーID</th>
+                <th>店舗ID</th>
+                <th>予約日時</th>
+                <th>人数</th>
+                <th>編集</th>
+                <th>削除</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.id }}</td>
+                <td>{{ reservation.user_id }}</td>
+                <td>{{ reservation.shop_id }}</td>
+                <td>{{ reservation.reservation_datetime }}</td>
+                <td>{{ reservation.number_of_people }}</td>
+                <td><a href="{% url 'reservation_update' reservation.id %}" class="btn btn-primary">編集</a></td>
+                <td><a href="{% url 'reservation_delete' reservation.id %}" class="btn btn-danger">削除</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'reservation_create' %}" class="btn btn-primary">新規作成</a>
+</div>
+{% endblock %}

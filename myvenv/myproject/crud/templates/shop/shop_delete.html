@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}店舗削除｜NAGOYAMESHI{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="my-div-style">
+            <h1>店舗削除</h1>
+            <form method="post">
+                {% csrf_token %}
+                <p>"{{ object }}"を削除しますか?</p>
+                <button type="submit" class="btn btn-danger">削除</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

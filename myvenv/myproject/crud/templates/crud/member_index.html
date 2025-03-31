@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}会員用ページ｜NAGOYAMESHI{% endblock %}
+
+{% block contents %}
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h2>会員用ページ</h2>
+            <a href="{% url 'logout' %}">ログアウト</a>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h2>店舗検索</h2>
+            <form method="get">
+                <section>
+                    <label for="category">カテゴリ</label>
+                    <select name="category">
+                        <option value="">選択してください</option>
+                        {% for category in category_list %}
+                        <option value="{{ category.pk }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </section>
+                <section>
+                    <label for="name">店舗名</label>
+                    <input type="text" name="name">
+                </section>
+                    <button type="submit">検索</button>
+            </form>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <a href="{% url 'crud:mypage' %}">マイページへ</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

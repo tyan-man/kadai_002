@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}ログイン｜NAGOYAMESHI{% endblock %}
+{% block active_login %}active{% endblock %}
+{% block contents %}
+<div class="container-fluid bg-light py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">ログイン</h1>
+                    <form method="post" action="{% url 'login' %}">
+                        {% include "_form.html" with submit_label="ログイン" %}
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary w-100">ログイン</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>アカウントをお持ちでない方は<a href="{% url 'signup' %}">こちら</a></p>
+                        <p>パスワードをお忘れの方は<a href="{% url 'password_reset' %}">こちら</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

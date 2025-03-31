@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}ユーザー詳細｜NAGOYAMESHI{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>ユーザー詳細</h1>
+    <p>ユーザー名: {{ object.username }}</p>
+    <p>名字: {{ object.first_name }}</p>
+    <p>名前: {{ object.last_name }}</p>
+    <p>メールアドレス: {{ object.email }}</p>
+    <p>ユーザー属性: {{ object.is_staff }}</p>
+    <p>ログイン状態: {{ object.is_active }}</p>
+    <p>登録日: {{ object.date_joined }}</p>
+    <p>最終ログイン: {{ object.last_login }}</p>
+    <a href="{% url 'crud:user_update' object.pk %}" class="btn btn-primary">更新</a>
+    <a href="{% url 'crud:user_delete' object.pk %}" class="btn btn-danger">削除</a>
+</div>
+{% endblock %}

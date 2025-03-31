@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}完了画面｜NAGOYAMESHI{% endblock %}
+{% block contents %}
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h2>完了</h2>
+            <p>完了しました。</p>
+            <a href="{% url 'crud:member_index' %}">トップページに戻る</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

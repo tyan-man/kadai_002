@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}マイページ｜NAGOYAMESHI{% endblock %}
+
+{% block contents %}
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h2>マイページ</h2>
+            <a href="{% url 'logout' %}">ログアウト</a>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>ユーザー情報</h3>
+            <p>ユーザー名：{{ user.username }}</p>
+            <p>メールアドレス：{{ user.email }}</p>
+            <a href="{% url 'crud:member_update' %}">ユーザー情報を更新する</a>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>お気に入り店舗</h3>
+            <a href="{% url 'crud:favorite_index' %}">お気に入り店舗一覧</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>クレジットカード情報の編集</h3>
+            <a href="{% url 'crud:creditcard_update' %}">クレジットカード情報を更新する</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>有料会員へのアップグレード</h3>
+            <a href="{% url 'crud:member_create' %}">有料会員に登録する</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>予約一覧</h3>
+            <a href="{% url 'crud:reservation_index' %}">予約一覧</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>有料会員の解約</h3>
+            <a href="{% url 'crud:member_cancel' %}">有料会員を解約する</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>退会</h3>
+            <a href="{% url 'crud:member_delete' %}">退会する</a>
+        </div>
+    </div>
+
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <a href="{% url 'crud:member_index' %}">トップページに戻る</a>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+
+        </div>
+    </div>
+</section>
+{% endblock %}

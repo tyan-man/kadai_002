@@ -19,7 +19,7 @@
                 "DB_PASSWORD": "riri1208",
                 "DB_HOST": "127.0.0.1",
                 "DB_PORT": "5432",
-                "DJANGO_SETTINGS_MODULE": "myproject.settings_dev",
+                "DJANGO_SETTINGS_MODULE": "myproject.settings"
             }
         },
         {
@@ -37,7 +37,7 @@
                 "DB_PASSWORD": "riri1208",
                 "DB_HOST": "127.0.0.1",
                 "DB_PORT": "5432",
-                "DJANGO_SETTINGS_MODULE": "myproject.settings_dev",
+                "DJANGO_SETTINGS_MODULE": "myproject.settings"
             }
         },
         {
@@ -55,7 +55,7 @@
                 "DB_PASSWORD": "riri1208",
                 "DB_HOST": "127.0.0.1",
                 "DB_PORT": "5432",
-                "DJANGO_SETTINGS_MODULE": "myproject.settings_dev",
+                "DJANGO_SETTINGS_MODULE": "myproject.settings"
             }
         }
     ]

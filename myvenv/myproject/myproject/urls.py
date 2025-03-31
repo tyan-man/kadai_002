@@ -16,9 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views import View
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include("django.contrib.auth.urls")),
     path('', include('crud.urls')),
-    path('accounts/', include('allauth.urls')),
+    path('', login_required(TemplateView.as_view(template_name='registration/index.html'))),
 ]
+
+urlpatterns += staticfiles_urlpatterns()

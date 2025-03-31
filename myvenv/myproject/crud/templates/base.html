@@ -8,9 +8,6 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>{% block title %}{% endblock %}</title>
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900"
         rel="stylesheet" />
@@ -28,19 +25,20 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
             <div class="container px-5">
-                <a class="navbar-brand" href="{% url 'crud:index' %}">NAGOYAMESHI</a>
+                <a class="navbar-brand" href="{% url 'top' %}">NAGOYAMESHI</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         {% if user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}">Log Out</a></li>
+                        <p>ようこそ{{ user.first_name }}{{ user.last_name }}さん</p>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">ログアウト</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link {% block active_signup %}{% endblock %}"
-                                href="{% url 'account_signup' %}">Sign Up</a></li>
+                                href="{% url 'signup' %}">会員登録</a></li>
                         <li class="nav-item"><a class="nav-link {% block active_login %}{% endblock %}"
-                                href="{% url 'account_login' %}">Log In</a></li>
+                                href="{% url 'login' %}">ログイン</a></li>
                         {% endif %}
                     </ul>
                 </div>
