@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}会員情報の更新｜NAGOYAMESHI{% endblock %}
+
+{% block contents %}
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h2>会員情報の更新</h2>
+            <a href="{% url 'crud:mypage' %}">マイページへ戻る</a>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>会員情報の更新</h3>
+            <form method="post" action="{% url 'crud:member_update' %}">
+                {% csrf_token %}
+                <section>
+                    <label for="username">ユーザー名</label>
+                    <input type="text" name="username" value="{{ user.username }}" required>
+                </section>
+                <section>
+                    <label for="email">メールアドレス</label>
+                    <input type="email" name="email" value="{{ user.email }}" required>
+                </section>
+                <button type="submit">更新</button>
+            </form>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>クレジットカード情報の削除</h3>
+            <form method="post" action="{% url 'subscription:creditcard_delete' pk=creditcard.pk %}">
+                {% csrf_token %}
+                <button type="submit"><a href="{% url 'crud:completion' %}">削除</a></button>
+            </form>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>クレジットカード情報の確認</h3>
+            <p>カード番号：{{ creditcard.card_number }}</p>
+            <p>有効期限：{{ creditcard.expiration_date }}</p>
+            <p>CVV：{{ creditcard.cvv }}</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

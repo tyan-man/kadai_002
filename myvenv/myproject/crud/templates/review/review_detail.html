@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}レビュー詳細｜NAGOYAMESHI{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>レビュー詳細</h1>
+    <div class="review-detail">
+        <h2>{{ review.title }}</h2>
+        <p><strong>評価:</strong> {{ review.rating }}</p>
+        <p><strong>内容:</strong> {{ review.content }}</p>
+        <p><strong>店舗:</strong> {{ review.shop.name }}</p>
+        <p><strong>ユーザー:</strong> {{ review.user.username }}</p>
+        <a href="{% url 'review_update' review.id %}" class="btn btn-primary">更新</a>
+        <a href="{% url 'review_delete' review.id %}" class="btn btn-danger">削除</a>
+    </div>
+    <a href="{% url 'review_list' %}" class="btn btn-secondary">一覧に戻る</a>
+</div>
+{% endblock %}

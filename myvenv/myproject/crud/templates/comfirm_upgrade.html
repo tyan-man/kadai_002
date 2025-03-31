@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}有料会員へのアップグレード画面｜NAGOYAMESHI{% endblock %}
+
+{% block contents %}
+<section>
+    <div class="my-div-style">
+        <h2>有料会員へのアップグレード画面</h2>
+        <p>リンクへ遷移するには、有料会員へのアップグレードが必要です。</p>
+        <p>以下のリンクをクリックして、アップグレードしてください。</p>
+        <a href="{% url 'subscription:upgrade' %}">有料会員へのアップグレード</a>
+    </div>
+</section>
+{% endblock %}

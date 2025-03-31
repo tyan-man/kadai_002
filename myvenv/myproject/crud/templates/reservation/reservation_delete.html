@@ -9,7 +9,7 @@
     <form method="post">
         {% csrf_token %}
         <p>予約を削除しますか？</p>
-        <button type="submit" class="btn btn-danger">削除</button>
+        <button type="submit" class="btn btn-danger"><a href="{% url 'crud:completion' %}">削除</a></button>
         <a href="{% url 'reservation_list' %}" class="btn btn-primary">キャンセル</a>
     </form>
 </div>

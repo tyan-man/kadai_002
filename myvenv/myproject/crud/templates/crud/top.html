@@ -12,7 +12,7 @@
         <div class="container">
             <h1 class="masthead-heading mb-0">NAGOYAMESHI</h1>
             <h2 class="masthead-subheading mb-0">名古屋の美味しいお店を紹介</h2>
-            <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'login' %}">LOG IN</a>
+            <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'crud:login' %}">LOG IN</a>
         </div>
     </div>
     <div class="bg-circle-1 bg-circle"></div>
@@ -26,11 +26,14 @@
 {% block contents %}
 <section>
     {% if user.is_authenticated %}
-    <p>ログイン中:{{ user.first_name }}{{ user.last_name }}さん</p>
-    <a href="{% url 'logout' %}">ログアウト</a>
+    <p>ログイン中:{{ user.username }}さん</p>
+    <a href="{% url 'crud:logout' %}">ログアウト</a>
     {% else %}
     <a href="{% url 'crud:member_index' %}">ログイン</a>
-    <a href="{% url 'signup' %}">会員登録</a>
+    <a href="{% url 'crud:signup' %}">会員登録</a>
+    {% endif %}
+    {% if user.is_superuseer %}
+    <a href="{% url 'crud:admin_index' %}">管理ユーザーメニューへ</a>
     {% endif %}
 </section>
 <section>

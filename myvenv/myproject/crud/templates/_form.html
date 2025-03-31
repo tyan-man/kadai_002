@@ -4,19 +4,19 @@
 {% load crispy_forms_tags %}
 {% load crispy_forms_filters %}
 {% load i18n %}
-{% load widget_tweaks %}
 
 {% block form %}
-<div class="form-group {% if form.field.name.errors %}has-error{% endif %}">
-    <label for="{{ form.field.name.id_for_label }}">{{ form.field.label }}</label>
-    {{ form.field|add_class:"form-control" }}
-    {% if form.field.help_text %}
-        <small class="form-text text-muted">{{ form.field.help_text }}</small>
+{% for field in form %}
+<div class="mb-3">
+    {{ field.label_tag }}
+    {{ field }}
+    {% if field.errors %}
+    <div class="text-danger">
+        {{ field.errors }}
+    </div>
     {% endif %}
-    {% for error in form.field.errors %}
-        <div class="alert alert-danger">{{ error }}</div>
-    {% endfor %}
 </div>
+{% endfor %}
 {% endblock form %}
 
 {% block formset %}

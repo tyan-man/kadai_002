@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}有料会員ホーム｜NAGOYAMESHI{% endblock %}
+{% block contents %}
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h2>有料会員ホーム</h2>
+            <p>有料会員の方は、以下の機能をご利用いただけます。</p>
+            {% if membership %}
+                <p>開始日: {{ membership.start_date }}</p>
+                <p>終了日: {{ membership.end_date }}</p>
+            {% else %}
+                <p>有料会員ではありません。</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>クレジットカード情報</h3>
+            <p>クレジットカード情報は以下のリンクから確認できます。</p>
+            <ul>
+                <li><a href="{% url 'subscription:creditcard_index' %}">クレジットカード情報一覧</a></li>
+                <li><a href="{% url 'subscription:creditcard_update' %}">クレジットカード情報更新</a></li>
+                <li><a href="{% url 'subscription:creditcard_delete' %}">クレジットカード情報削除</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>お気に入り店舗</h3>
+            <p>お気に入り店舗は以下のリンクから確認できます。</p>
+            <ul>
+                <li><a href="{% url 'crud:favorite_shop_list' %}">お気に入り店舗一覧</a></li>
+                <li><a href="{% url 'crud:favorite_shop_add' %}">お気に入り店舗追加</a></li>
+                <li><a href="{% url 'crud:favorite_shop_delete' %}">お気に入り店舗削除</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>お気に入り店舗詳細</h3>
+            <p>お気に入り店舗の詳細は以下のリンクから確認できます。</p>
+            <ul>
+                <li><a href="{% url 'crud:favorite_shop_detail' favorite_shop.id %}">お気に入り店舗詳細</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class my-div-style>
+            <h3>レビュー一覧</h3>
+            <p>レビューは以下のリンクから確認できます。</p>
+            <ul>
+                <li><a href="{% url 'crud:review_list' %}">レビュー一覧</a></li>
+                <li><a href="{% url 'crud:review_add' %}">レビュー追加</a></li>
+                <li><a href="{% url 'crud:review_update' %}">レビュー更新</a></li>
+                <li><a href="{% url 'crud:review_delete' %}">レビュー削除</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+{% endblock %}

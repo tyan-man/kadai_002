@@ -11,15 +11,15 @@
             <div class="card shadow-sm">
                 <div class="card-body">
                     <h1 class="text-center mb-4">ログイン</h1>
-                    <form method="post" action="{% url 'login' %}">
-                        {% include "_form.html" with submit_label="ログイン" %}
+                    <form method="post" action="{% url 'crud:login' %}">
                         {% csrf_token %}
                         {{ form|crispy }}
-                        <button type="submit" class="btn btn-primary w-100">ログイン</button>
+                        <button type="submit" class="btn btn-primary w-100"><a
+                            href="{% url 'crud:member_index' %}">ログイン</a></button>
                     </form>
                     <div class="text-center mt-3">
-                        <p>アカウントをお持ちでない方は<a href="{% url 'signup' %}">こちら</a></p>
-                        <p>パスワードをお忘れの方は<a href="{% url 'password_reset' %}">こちら</a></p>
+                        <p>アカウントをお持ちでない方は<a href="{% url 'crud:signup' %}">こちら</a></p>
+                        <p>パスワードをお忘れの方は<a href="{% url 'crud:password_reset' %}">こちら</a></p>
                     </div>
                 </div>
             </div>

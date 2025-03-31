@@ -5,15 +5,27 @@
 {% block title %}会員登録｜NAGOYAMESHI{% endblock %}
 {% block active_signup %}active{% endblock %}
 {% block contents %}
-<div class="container d-flex justify-content-center">
-    <div class="row col-12 col-md-5">
-        <div class="my-div-style">
-            <h1 class="text-center mb-4">会員登録</h1>
-            <form method="post" action="{% url 'signup' %}">
-                {% include "_form.html" with submit_label="登録" %}
-                {% endif %}
-                <button type="submit" class="btn btn-primary w-100">登録</button>
-            </form>
+<div class="container-fluid bg-light py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">会員登録</h1>
+                    <form method="post" action="{% url 'crud:signup' %}">
+                        <p>会員登録を行います。</p>
+                        <p>登録したメールアドレスに確認メールが届きます。</p>
+                        <p>メールに記載されたURLをクリックして、登録を完了してください。</p>
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary w-100"><a
+                                href="{% url 'crud:member_index' %}">登録</a></button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>すでにアカウントをお持ちの方は<a href="{% url 'crud:login' %}">こちら</a></p>
+                        <p>パスワードをお忘れの方は<a href="{% url 'crud:password_reset' %}">こちら</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

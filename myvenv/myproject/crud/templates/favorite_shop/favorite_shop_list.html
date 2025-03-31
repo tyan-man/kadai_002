@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}お気に入り店舗一覧｜NAGOYAMESHI{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="my-div-style">
+            <h1>お気に入り店舗一覧</h1>
+            {% if favorite_shops %}
+            <ul>
+                {% for shop in favorite_shops %}
+                <li>{{ shop.name }}</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>お気に入り店舗はありません。</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'crud:favorite_shop_create' %}" class="btn btn-primary">お気に入り店舗を追加</a>
+        <a href="{% url 'crud:favorite_shop_update' favorite_shop.id %}" class="btn btn-primary">お気に入り店舗を更新</a>
+        <a href="{% url 'crud:favorite_shop_delete' favorite_shop.id %}" class="btn btn-danger">お気に入り店舗を削除</a>
+        <a href="{% url 'crud:favorite_shop_detail' favorite_shop.id %}" class="btn btn-info">お気に入り店舗詳細</a>
+    </div>
+    <div class="my-div-style">
+        <a href="{% url 'crud:member_index' %}">トップページに戻る</a>
+    </div>
+</div>
+{% endblock %}

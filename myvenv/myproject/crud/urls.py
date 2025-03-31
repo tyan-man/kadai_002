@@ -1,14 +1,29 @@
 from django.urls import path
+from uuid import UUID
 from . import views
+from .views import SignUpView, PasswordResetDoneView
+from django.contrib.auth.views import (
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordResetConfirmView,
+    PasswordResetCompleteView,
+    LoginView,
+)
 
 app_name = "crud"
 urlpatterns = [
     path("", views.TopView.as_view(), name="top"),
+    path("member_index/", views.MemberIndexView.as_view(), name="member_index"),
     path("signup/", views.SignUpView.as_view(), name="signup"),
-    path("login/", views.LoginView.as_view(), name="login"),
+    path("login/", LoginView.as_view(), name="login"),
     path("logout/", views.LogoutView.as_view(), name="logout"),
+    path("password_change/", views.PasswordChangeView.as_view(), name="password_change"),
+    path("password_change/done/", views.PasswordChangeDoneView.as_view(), name="password_change_done"),
+    path("password_reset/", PasswordResetView.as_view(), name="password_reset"),
+    path("password_reset/done/", PasswordResetDoneView.as_view(), name="password_reset_done"),
+    path("reset/<uidb64>/<token>/", PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path("reset/done/", PasswordResetCompleteView.as_view(), name="password_reset_complete"),
     path("admin_index/", views.AdminIndexView.as_view(), name="admin_index"),
-    path("member/", views.MemberIndexView.as_view(), name="member_index"),
     path("mypage/", views.MypageView.as_view(), name="mypage"),
     path("shop/", views.ShopListView.as_view(), name="shop_list"),
     path("shop/<int:pk>/", views.ShopDetailView.as_view(), name="shop_detail"),
@@ -30,7 +45,19 @@ urlpatterns = [
     path("review/create/", views.ReviewCreateView.as_view(), name="review_create"),
     path("review/update/<int:pk>/", views.ReviewUpdateView.as_view(), name="review_update"),
     path("review/delete/<int:pk>/", views.ReviewDeleteView.as_view(), name="review_delete"),
-    path("favorite/", views.FavoriteShopListView.as_view(), name="favorite_list"),
-    path("favorite/create/", views.FavoriteShopCreateView.as_view(), name="favorite_create"),
-    path("favorite/delete/<int:pk>/", views.FavoriteShopDeleteView.as_view(), name="favorite_delete"),
+    path("favorite/", views.FavoriteShopListView.as_view(), name="favorite_shop_list"),
+    path("favorite/create/", views.FavoriteShopCreateView.as_view(), name="favorite_shop_create"),
+    path("favorite/delete/<int:pk>/", views.FavoriteShopDeleteView.as_view(), name="favorite_shop_delete"),
+    path("favorite/<int:pk>/", views.FavoriteShopDetailView.as_view(), name="favorite_shop_detail"),
+    path("user/<int:pk>/", views.UserDetailView.as_view(), name="user_detail"),
+    path("user/update/<int:pk>/", views.UserUpdateView.as_view(), name="user_update"),
+    path("user/delete/<int:pk>/", views.UserDeleteView.as_view(), name="user_delete"),
+    path("user/create/", views.UserCreateView.as_view(), name="user_create"),
+    path("user/list/", views.UserListView.as_view(), name="user_list"),
+    path("user/<int:pk>/delete/", views.UserDeleteView.as_view(), name="user_delete"),
+    path("user/<int:pk>/update/", views.UserUpdateView.as_view(), name="user_update"),
+    path("user/<int:pk>/detail/", views.UserDetailView.as_view(), name="user_detail"),
+    path("user/cancel/<int:pk>/", views.UserCancelView.as_view(), name="user_cancel"),
+    path("user/cancel/<uuid:pk>/", views.UserCancelView.as_view(), name="user_cancel"),
+    path('completion/', views.CompletionView.as_view(), name='completion'),  # 完了ページのURL
 ]

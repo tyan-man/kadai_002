@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}クレジットカード一覧｜NAGOYAMESHI{% endblock %}
+{% block contents %}
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h2>クレジットカード一覧</h2>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>カード名</th>
+                        <th>カード番号</th>
+                        <th>有効期限</th>
+                        <th>セキュリティコード</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for creditcard in creditcards %}
+                    <tr>
+                        <td>{{ creditcard.card_name }}</td>
+                        <td>{{ creditcard.card_number }}</td>
+                        <td>{{ creditcard.expiration_date }}</td>
+                        <td>{{ creditcard.security_code }}</td>
+                        <td><a href="{% url 'subscription:creditcard_update' creditcard.id %}">更新</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- 新規登録ボタン -->
+            <a href="{% url 'subscription:creditcard_create' %}" class="btn btn-primary">新規登録</a>
+
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>クレジットカード情報の削除</h3>
+            {% if creditcard %}
+                <form method="post" action="{% url 'subscription:creditcard_delete' pk=creditcard.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">削除</button>
+                </form>
+            {% else %}
+                <p>クレジットカード情報が登録されていません。</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>クレジットカード情報の確認</h3>
+            <p>カード番号：{{ creditcard.card_number }}</p>
+            <p>有効期限：{{ creditcard.expiration_date }}</p>
+            <p>CVV：{{ creditcard.cvv }}</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

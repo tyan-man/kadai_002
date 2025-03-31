@@ -25,20 +25,37 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
             <div class="container px-5">
-                <a class="navbar-brand" href="{% url 'top' %}">NAGOYAMESHI</a>
+                <a class="navbar-brand" href="{% url 'crud:top' %}">NAGOYAMESHI</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                     aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        {% if user.is_authenticated %}
-                        <p>ようこそ{{ user.first_name }}{{ user.last_name }}さん</p>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">ログアウト</a></li>
+                        {% if request.user.is_authenticated %}
+                        <h2 class="navbar-brand">
+                            {% if request.user.is_superuser %}
+                            <a href="{% url 'crud:admin:index' %}">管理者用ページ</a>
+                            {% elif request.user.is_staff %}
+                            <a href="{% url 'crud:staff:index' %}">スタッフ用ページ</a>
+                            {% else %}
+                            <a href="{% url 'crud:member_index' %}">会員用ページ</a>
+                            {% endif %}
+                        </h2>
+                        <h3 class="navbar-brand">
+                            {{ user.username }}さんは
+                            {% if request.user.is_superuser %}
+                                スーパーユーザー
+                            {% elif request.user.is_active %}
+                                アクティブユーザー
+                            {% endif %}
+                            です
+                        </h3>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'crud:logout' %}">ログアウト</a></li>
                         {% else %}
                         <li class="nav-item"><a class="nav-link {% block active_signup %}{% endblock %}"
-                                href="{% url 'signup' %}">会員登録</a></li>
+                                href="{% url 'crud:signup' %}">会員登録</a></li>
                         <li class="nav-item"><a class="nav-link {% block active_login %}{% endblock %}"
-                                href="{% url 'login' %}">ログイン</a></li>
+                                href="{% url 'crud:login' %}">ログイン</a></li>
                         {% endif %}
                     </ul>
                 </div>

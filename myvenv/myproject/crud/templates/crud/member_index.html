@@ -10,7 +10,7 @@
     <div class="container">
         <div class="my-div-style">
             <h2>会員用ページ</h2>
-            <a href="{% url 'logout' %}">ログアウト</a>
+            <a href="{% url 'crud:logout' %}">ログアウト</a>
         </div>
     </div>
 </section>
@@ -29,10 +29,11 @@
                     </select>
                 </section>
                 <section>
-                    <label for="name">店舗名</label>
-                    <input type="text" name="name">
+                    <div class="my-div-style">
+                        {% csrf_token %}
+                        {{ form.as_p}}
+                    </div>
                 </section>
-                    <button type="submit">検索</button>
             </form>
         </div>
     </div>

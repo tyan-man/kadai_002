@@ -43,10 +43,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "crud.apps.CrudConfig",
-    "django.contrib.sites",
+    "django.contrib.sites", 
     "django_bootstrap5",
     "crispy_forms",
     "crispy_bootstrap5",
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'subscription',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
@@ -143,21 +147,16 @@ STATICFILES_DIRS = [
 ]
 
 
-AUTH_USER_MODEL = "crud.User"
+AUTH_USER_MODEL = "crud.CustomUser"
 
 #django-allauthで利用するdjango.contrib.sitesを使うためにサイト識別用のIDを設定
 SITE_ID = 1
 
-AUTENTICATION_BACKENDS = (
-    "allauth.account.auth_backends.AuthenticationBackend",
-    #一般ユーザー用(メールアドレス認証)
-    "django.contrib.auth.backends.ModelBackend",
-    #管理サイト用(ユーザー名認証)
-)
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # デフォルトの認証バックエンド
+    'allauth.account.auth_backends.AuthenticationBackend',  # django-allauth の認証バックエンド
+]
 
-#メールアドレス認証に変更する設定
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_USERNAME_REQUIRED = False
 
 #サインアップ時にメールアドレスを必須にする設定
 ACCOUNT_EMAIL_VERIFICATION="mandatory"
@@ -165,8 +164,8 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 #ログイン/ログアウト後のリダイレクト先を設定
 LOGIN_URL = "/login/"
-LOGIN_REDIRECT_URL = "login"
-ACCOUNT_LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "crud:member_index"
+ACCOUNT_LOGOUT_REDIRECT_URL = "top"
 
 #ログアウトリンクのクリックを一発でログアウトする設定
 ACCOUNT_LOGOUT_ON_GET = True
@@ -181,3 +180,7 @@ DEFAULT_FROM_EMAIL = os.environ.get("FROM_EMAIL")
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_URL = "/media/"
+
+FRONTEND_URL = "https://127.0.0.1:8000"
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.cached_db'

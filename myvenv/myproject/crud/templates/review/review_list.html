@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block title %}レビュー一覧｜NAGOYAMESHI{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>レビュー一覧</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>レビューID</th>
+                <th>店舗名</th>
+                <th>ユーザー名</th>
+                <th>評価</th>
+                <th>コメント</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for review in reviews %}
+            <tr>
+                <td>{{ review.id }}</td>
+                <td>{{ review.shop.name }}</td>
+                <td>{{ review.user.username }}</td>
+                <td>{{ review.rating }}</td>
+                <td>{{ review.comment }}</td>
+                <td><a href="{% url 'review_update' review.id %}" class="btn btn-primary">編集</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'review_create' %}" class="btn btn-success">新規レビュー作成</a>
+    <a href="{% url 'shop_list' %}" class="btn btn-secondary">店舗一覧に戻る</a>
+</div>
+{% endblock %}

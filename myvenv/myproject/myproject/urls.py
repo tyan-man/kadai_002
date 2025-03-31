@@ -26,9 +26,9 @@ from django.views import View
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("django.contrib.auth.urls")),
-    path('', include('crud.urls')),
-    path('', login_required(TemplateView.as_view(template_name='registration/index.html'))),
+    path('accounts/', include('allauth.urls')),
+    path('', include('crud.urls')), 
+    path('subscription/', include('subscription.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

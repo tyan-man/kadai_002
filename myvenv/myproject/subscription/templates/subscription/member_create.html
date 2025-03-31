@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}有料会員登録｜NAGOYAMESHI{% endblock %}
+
+{% block contents %}
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h2>有料会員登録</h2>
+            <a href="{% url 'crud:mypage' %}">マイページへ戻る</a>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>有料会員登録</h3>
+            <form method="post" action="{% url 'subscription:member_create' %}">
+                {% csrf_token %}
+                <section>
+                    <label for="card_number">カード番号</label>
+                    <input type="text" name="card_number" required>
+                </section>
+                <section>
+                    <label for="expiration_date">有効期限</label>
+                    <input type="text" name="expiration_date" required>
+                </section>
+                <section>
+                    <label for="cvv">CVV</label>
+                    <input type="text" name="cvv" required>
+                </section>
+                <button type="submit">登録</button>
+            </form>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>クレジットカード情報の削除</h3>
+            {% if creditcard %}
+                <form method="post" action="{% url 'subscription:creditcard_delete' pk=creditcard.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">削除</button>
+                </form>
+            {% else %}
+                <p>クレジットカード情報が登録されていません。</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="my-div-style">
+            <h3>クレジットカード情報の確認</h3>
+            <p>カード番号：{{ creditcard.card_number }}</p>
+            <p>有効期限：{{ creditcard.expiration_date }}</p>
+            <p>CVV：{{ creditcard.cvv }}</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

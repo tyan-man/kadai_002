@@ -10,7 +10,7 @@
     <div class="container">
         <div class="my-div-style">
             <h2>マイページ</h2>
-            <a href="{% url 'logout' %}">ログアウト</a>
+            <a href="{% url 'crud:logout' %}">ログアウト</a>
         </div>
     </div>
 </section>
@@ -20,7 +20,6 @@
             <h3>ユーザー情報</h3>
             <p>ユーザー名：{{ user.username }}</p>
             <p>メールアドレス：{{ user.email }}</p>
-            <a href="{% url 'crud:member_update' %}">ユーザー情報を更新する</a>
         </div>
     </div>
 </section>
@@ -28,52 +27,78 @@
     <div class="container">
         <div class="my-div-style">
             <h3>お気に入り店舗</h3>
-            <a href="{% url 'crud:favorite_index' %}">お気に入り店舗一覧</a>
+            <a href="{% url 'crud:favorite_shop_list' %}">お気に入り店舗一覧</a>
         </div>
     </div>
     <div class="container">
         <div class="my-div-style">
             <h3>クレジットカード情報の編集</h3>
-            <a href="{% url 'crud:creditcard_update' %}">クレジットカード情報を更新する</a>
+            {% if creditcard %}
+            <a href="{% url 'subscription:creditcard_update' pk=creditcard.pk %}">クレジットカードを更新</a>
+            <form method="post" action="{% url 'subscription:creditcard_delete' pk=creditcard.pk %}">
+                {% else %}
+                <p>クレジットカード情報が登録されていません。</p>
+                {% endif %}
+                {% csrf_token %}
+                <form method="post" action="{% url 'subscription:creditcard_create' %}">
+                    {% csrf_token %}
+                    <button type="submit">クレジットカードを登録</button>
+                </form>
+                {% if creditcard %}
+                <form method="post" action="{% url 'subscription:creditcard_delete' pk=creditcard.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">削除</button>
+                </form>
+                {% endif %}
+            </form>
+        </div>
+        <div class="container">
+            <div class="my-div-style">
+                <h3>クレジットカード情報の削除</h3>
+                {% if creditcard %}
+                <form method="post" action="{% url 'subscription:creditcard_delete' pk=creditcard.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">削除</button>
+                </form>
+                {% else %}
+                <p>クレジットカード情報が登録されていません。</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <div class="my-div-style">
+                <h3>有料会員へのアップグレード</h3>
+                <a href="{% url 'subscription:member_create' %}">有料会員に登録する</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="my-div-style">
+                <h3>予約一覧</h3>
+                <a href="{% url 'crud:reservation_list' %}">予約一覧</a>
+            </div>
+        </div>
+        <div class="container">
+            <div class="my-div-style">
+                <h3>有料会員の解約</h3>
+                {% if creditcard %}
+                <a href="{% url 'subscription:member_delete' pk=creditcard.pk %}">有料会員を解約する</a>
+                {% else %}
+                <p>有料会員情報が登録されていません。</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="container">
+            <div class="my-div-style">
+                <h3>退会</h3>
+                <a href="{% url 'crud:user_cancel' pk=user.pk %}">退会する</a>
+            </div>
         </div>
     </div>
-    <div class="container">
-        <div class="my-div-style">
-            <h3>有料会員へのアップグレード</h3>
-            <a href="{% url 'crud:member_create' %}">有料会員に登録する</a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="my-div-style">
-            <h3>予約一覧</h3>
-            <a href="{% url 'crud:reservation_index' %}">予約一覧</a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="my-div-style">
-            <h3>有料会員の解約</h3>
-            <a href="{% url 'crud:member_cancel' %}">有料会員を解約する</a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="my-div-style">
-            <h3>退会</h3>
-            <a href="{% url 'crud:member_delete' %}">退会する</a>
-        </div>
-    </div>
-
 </section>
 <section>
     <div class="container">
         <div class="my-div-style">
             <a href="{% url 'crud:member_index' %}">トップページに戻る</a>
-        </div>
-    </div>
-</section>
-<section>
-    <div class="container">
-        <div class="my-div-style">
-
         </div>
     </div>
 </section>
